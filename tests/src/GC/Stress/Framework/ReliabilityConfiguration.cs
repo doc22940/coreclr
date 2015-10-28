@@ -414,7 +414,9 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             {
                                                 int CPUCount = Convert.ToInt32(Environment.GetEnvironmentVariable("NUMBER_OF_PROCESSORS"));
                                                 if (CPUCount <= 0)
-                                                    throw new Exception("Invalid Value when reading NUMBER_OF_PROCESSORS: {0}" + CPUCount);
+                                                    CPUCount = Environment.ProcessorCount;
+                                                if (CPUCount <= 0)
+                                                    throw new Exception("Invalid Value when reading NUMBER_OF_PROCESSORS and Environment.ProcessorCount: " + CPUCount);
                                                 _curTestSet.MinTestsRunning = CPUCount;
                                                 _curTestSet.MaxTestsRunning = (int)(CPUCount * 1.5);
                                             }
@@ -1004,13 +1006,13 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
         }
 
 
-        if (basepath.LastIndexOf("\\") == (basepath.Length - 1))
+        if (basepath.LastIndexOf(Path.PathSeparator) == (basepath.Length - 1))
         {
             return (basepath + trimmedPath);
         }
         else
         {
-            return (basepath + "\\" + trimmedPath);
+            return Path.Combine(basepath, trimmedPath);
         }
     }
 

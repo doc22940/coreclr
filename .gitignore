@@ -23,6 +23,11 @@ bld/
 [Oo]bj/
 msbuild.log
 
+# Mono test-runner output
+tests/**/*.stdout
+tests/**/*.stderr
+tests/**/*.mdb
+
 # Visual Studio 2015
 .vs/
 

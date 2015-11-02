@@ -76,7 +76,7 @@ namespace TestLibrary
             [SecuritySafeCritical]
             get
             {
-                return true;
+                return Environment.OSVersion.Platform == PlatformID.Win32NT;
             }
         }
 

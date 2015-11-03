@@ -46,7 +46,7 @@ public class RegionInfoCurrentRegion
         }
         catch (Exception e)
         {
-            TestLibrary.TestFramework.LogError("002", "Unexpect exception:" + e);
+            TestLibrary.TestFramework.LogError("002", "Unexpect exception for RegionInfo about " + TestLibrary.Utilities.CurrentCulture.Name + ":" + e);
             retVal = false;
         }
         return retVal;

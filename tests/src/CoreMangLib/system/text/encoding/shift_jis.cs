@@ -28,12 +28,19 @@ public class Shift_JisTest
         bool retVal = true;
 
         TestLibrary.Logging.WriteLine("[Positive]");
+#if MONO // TODO: look at the failures in PosTest2 and PosTest3
+        retVal = PosTest1() && retVal;
+        //retVal = PosTest2() && retVal;
+        //retVal = PosTest3() && retVal;
+        retVal = PosTest4() && retVal;
+#else
         // We now support only Unicode and UTF8 encodings
         //retVal = PosTest1() && retVal;
         //retVal = PosTest2() && retVal;
         //retVal = PosTest3() && retVal;
         //retVal = PosTest4() && retVal;
         retVal = NegTest1() && retVal;
+#endif
 
         return retVal;
     }

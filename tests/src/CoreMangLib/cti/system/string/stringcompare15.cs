@@ -207,7 +207,6 @@ class StringCompare5
         try
         {
             actualValue = this.CallTestMethod(paras);
-            if (paras.strA != null && paras.strB != null) expectedValue = GlobLocHelper.OSCompare(paras.strA, paras.strB);
             if (expectedValue != actualValue)
             {
                 string errorDesc = "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";
@@ -243,7 +242,6 @@ class StringCompare5
         try
         {
             actualValue = (0 != this.CallTestMethod(paras));
-            if (paras.strA != null && paras.strB != null) expectedValue = (0 != GlobLocHelper.OSCompare(paras.strA, paras.strB));
             if (expectedValue != actualValue)
             {
                 string errorDesc = "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";
@@ -279,7 +277,6 @@ class StringCompare5
         try
         {
             actualValue = (0 > this.CallTestMethod(paras));
-            if (paras.strA != null && paras.strB != null) expectedValue = (0 > GlobLocHelper.OSCompare(paras.strA, paras.strB));
             if (expectedValue != actualValue)
             {
                 string errorDesc = "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";

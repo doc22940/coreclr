@@ -245,7 +245,7 @@ class StringCompare5
         Parameters paras;
 
         const string c_TEST_DESC = "String.Empty vs \"\\0\"";
-        int expectedValue = TestLibrary.Utilities.IsWindows?0:(-1);
+        int expectedValue = 0;
 
         paras.strA = string.Empty;
         paras.strB = "\0";
@@ -539,7 +539,6 @@ class StringCompare5
         try
         {
             actualValue = this.CallTestMethod(paras);
-            if (paras.strA != null && paras.strB != null) expectedValue = (TestLibrary.GlobLocHelper.OSCompare(paras.strA, paras.strB));
             if (expectedValue != actualValue)
             {
                 string errorDesc = "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";
@@ -579,7 +578,6 @@ class StringCompare5
         try
         {
             actualValue = (0 != this.CallTestMethod(paras));
-            if (paras.strA != null && paras.strB != null) expectedValue =  (0 != TestLibrary.GlobLocHelper.OSCompare(paras.strA, paras.strB));
             if (expectedValue != actualValue)
             {
                 string errorDesc = "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";
@@ -619,7 +617,6 @@ class StringCompare5
         try
         {
             actualValue = (0 > this.CallTestMethod(paras));
-            if (paras.strA != null && paras.strB != null) expectedValue = (0 > TestLibrary.GlobLocHelper.OSCompare(paras.strA, paras.strB));
             if (expectedValue != actualValue)
             {
                 string errorDesc = "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";

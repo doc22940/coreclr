@@ -61,13 +61,13 @@ public class DateTimeParseExact2
                 dateBefore = DateTime.Now.ToString();
 
                 dateAfter = DateTime.ParseExact( dateBefore, "G", formater, c_STYLES[i] );
-
+#if !MONO
                 if (!TestLibrary.Utilities.IsWindows && 
                     (c_STYLES[i]==DateTimeStyles.AdjustToUniversal)) // Mac prints offset
                 {
                     dateAfter = dateAfter.ToLocalTime();
                 }
-
+#endif
                 if (!dateBefore.Equals(dateAfter.ToString()))
                 {
                    TestLibrary.TestFramework.LogError("001", "DateTime.ParseExact(" + dateBefore + ", G, " + c_STYLES[i] + ") did not equal " + dateAfter.ToString());

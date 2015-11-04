@@ -167,7 +167,7 @@ namespace StringCompareTo1
                 strA = " ";
                 strB = "  ";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // -1
+                int ExpectedResult = -1; // -1
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("007", "one space CompareTo two spaces ExpectResult is less 0 ActualResult is (" + ActualResult + ")");
@@ -195,7 +195,7 @@ namespace StringCompareTo1
                 strA = "helloword!";
                 strB = "helloword!";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // 0
+                int ExpectedResult = 0; // 0
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("009", "Two like strings CompareTo ExpectResult is equel 0 ActualResult is (" + ActualResult + ")");
@@ -223,7 +223,7 @@ namespace StringCompareTo1
                 strA = "helloWord";
                 strB = "helloword";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // 1
+                int ExpectedResult = 1; // 1
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("011", "One string with lower chars CompareTo the uppers ExpectResult is greater 0 ActualResult is (" + ActualResult + ")");
@@ -251,7 +251,7 @@ namespace StringCompareTo1
                 strA = "helloword";
                 strB = " helloword";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // 1
+                int ExpectedResult = 1; // 1
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("013", "string CompareTo its with space one ExpectResult is greater 0 ActualResult is (" + ActualResult + ")");
@@ -279,7 +279,7 @@ namespace StringCompareTo1
                 strA = "helloword";
                 strB = "hello word";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // 1
+                int ExpectedResult = 1; // 1
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("015", "string CompareTo its with space one ExpectResult is greater 0 ActualResult is (" + ActualResult + ")");
@@ -307,7 +307,7 @@ namespace StringCompareTo1
                 strA = "helloword";
                 strB = "helloword ";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // -1
+                int ExpectedResult = -1; // -1
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("017", "string CompareTo its with space three ExpectResult is less 0 ActualResult is (" + ActualResult + ")");
@@ -334,7 +334,7 @@ namespace StringCompareTo1
                 strA = "A";
                 strB = "a";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // 1
+                int ExpectedResult = 1; // 1
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("019", "strings with one char CompareTo ExpectResult is greater 0,ActualResult is (" + ActualResult + ")");
@@ -362,7 +362,7 @@ namespace StringCompareTo1
                 strA = "hello\nword";
                 strB = "helloword";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // -1
+                int ExpectedResult = -1; // -1
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("021", "string CompareTo its with newline symbol one ExpectResult is less 0,ActualResult is (" + ActualResult + ")");
@@ -390,7 +390,7 @@ namespace StringCompareTo1
                 strA = "helloword\n";
                 strB = "helloword";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // 1
+                int ExpectedResult = 1; // 1
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("023", "string CompareTo its with newline symbol two ExpectResult is great 0,ActualResult is (" + ActualResult + ")");
@@ -418,7 +418,7 @@ namespace StringCompareTo1
                 strA = "\nhelloword";
                 strB = "helloword";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // -1
+                int ExpectedResult = -1; // -1
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("025", "string CompareTo its with newline symbol three ExpectResult is less 0,ActualResult is (" + ActualResult + ")");
@@ -446,7 +446,7 @@ namespace StringCompareTo1
                 strA = "hello\0word";
                 strB = "helloword";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // 0
+                int ExpectedResult = 0; // 0
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("027", "strings embedded nulls CompareTo one ExpectResult is equel 0,ActualResult is (" + ActualResult + ")");
@@ -474,7 +474,7 @@ namespace StringCompareTo1
                 strA = "helloword\0";
                 strB = "helloword";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // 0
+                int ExpectedResult = 0; // 0
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("029", "strings embedded nulls CompareTo two ExpectResult is equel 0,ActualResult is (" + ActualResult + ")");
@@ -502,7 +502,7 @@ namespace StringCompareTo1
                 strA = "\0helloword";
                 strB = "helloword";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // 0
+                int ExpectedResult = 0; // 0
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("031", "strings embedded nulls CompareTo three ExpectResult is equel 0,ActualResult is (" + ActualResult + ")");
@@ -530,7 +530,7 @@ namespace StringCompareTo1
                 strA = "A\u0300";
                 strB = "\u00C0";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // 0
+                int ExpectedResult = 0; // 0
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("033", "Globalized strings CompareTo ExpectResult is equel 0,ActualResult is (" + ActualResult + ")");
@@ -558,7 +558,7 @@ namespace StringCompareTo1
                 strA = "A";
                 strB = "£Á";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // 1
+                int ExpectedResult = 1; // 1
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("035", "Two different strings CompareTo one ExpectResult is less 0,ActualResult is (" + ActualResult + ")");
@@ -586,7 +586,7 @@ namespace StringCompareTo1
                 strA = "\uD801\uDC00";
                 strB = "\uD801\uDC28";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // -1
+                int ExpectedResult = -1; // -1
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("037", "Two different strings CompareTo two ExpectResult is less 0,ActualResult is (" + ActualResult + ")");
@@ -615,7 +615,7 @@ namespace StringCompareTo1
                 strA = "\\\\my documents\\my files\\";
                 strB = @"\\my documents\my files\";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // 0
+                int ExpectedResult = 0; // 0
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("039", "Two different strings CompareTo three Expected Result is equel 0,Actual Result is ( " + ActualResult + ")");
@@ -644,7 +644,7 @@ namespace StringCompareTo1
                 strA = "\t";
                 strB = "    ";
                 ActualResult = strA.CompareTo(strB);
-                int ExpectedResult = GlobLocHelper.OSCompare(strA, strB); // 1
+                int ExpectedResult = 1; // 1
                 if (ActualResult != ExpectedResult)
                 {
                     TestLibrary.TestFramework.LogError("041", "Tab CompareTo four spaces Expected Result is greater 0,Actual Result is ( " + ActualResult + ")");

@@ -78,7 +78,7 @@ class StringCompare1
 
         try
         {
-            int expected = GlobLocHelper.OSCompare(str1, 0, str2, 0, str1.Length);  // 1;
+            int expected = 1;  // 1;
             if (String.Compare(str1, 0, str2, 0, str1.Length) != expected)
             {
                 TestLibrary.TestFramework.LogError("001", "The result is equal when compare different cases string!");

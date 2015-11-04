@@ -68,7 +68,7 @@ namespace DictionaryEntryCtor
             try
             {
                 TestLibrary.TestFramework.BeginScenario("Compare the same string with different cases when ignore the case...");
-                int expected = GlobLocHelper.OSCompare(str1, 2, str2, 2, 3, true); // 0;
+                int expected = 0; // 0;
                 if (String.Compare(str1, 2, str2, 2, 3, StringComparison.CurrentCultureIgnoreCase) != expected)
                 {
                     TestLibrary.TestFramework.LogError("001", "LLOWO is not equal to llowo when ignore the case...");
@@ -96,7 +96,7 @@ namespace DictionaryEntryCtor
             try
             {
                 TestLibrary.TestFramework.BeginScenario("Compare the same string with different cases when the case is considered...");
-                int expected = GlobLocHelper.OSCompare(str1, 2, str2, 2, 3, false); // 1;
+                int expected = 1; // 1;
                 if (String.Compare(str1, 2, str2, 2, 3, StringComparison.CurrentCulture) != expected)
                 {
                     TestLibrary.TestFramework.LogError("009", "LLOWO is not larger than llowo when the case is considered!");

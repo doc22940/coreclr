@@ -50,7 +50,7 @@ public class CharToUpper
         try
         {
             char ch = 'A';
-            char expectedChar = GlobLocHelper.OSToUpper(ch); // ch;
+            char expectedChar = 'A'; // ch;
             char actualChar = char.ToUpper(ch);
             if (actualChar != expectedChar)
             {
@@ -82,7 +82,7 @@ public class CharToUpper
         try
         {
             char ch = 'a';
-            char expectedChar = GlobLocHelper.OSToUpper(ch); // 'A';
+            char expectedChar = 'A'; // 'A';
             char actualChar = char.ToUpper(ch);
             if (actualChar != expectedChar)
             {
@@ -114,7 +114,11 @@ public class CharToUpper
         try
         {
             char ch = TestLibrary.Generator.GetCharNumber(-55);
+#if MONO
+            char expectedChar = '\u17e4';
+#else
             char expectedChar = GlobLocHelper.OSToUpper(ch); // ch;
+#endif
             char actualChar = char.ToUpper(ch);
             if (actualChar != expectedChar)
             {

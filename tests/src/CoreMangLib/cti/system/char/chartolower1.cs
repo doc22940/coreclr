@@ -50,7 +50,7 @@ public class CharToLower
         try
         {
             char ch = 'A';
-            char expectedChar = GlobLocHelper.OSToLower(ch); // 'a';
+            char expectedChar = 'a'; // 'a';
             char actualChar = char.ToLower(ch);
             if (actualChar != expectedChar)
             {
@@ -82,7 +82,7 @@ public class CharToLower
         try
         {
             char ch = 'a';
-            char expectedChar = GlobLocHelper.OSToLower(ch); // ch;
+            char expectedChar = 'a'; // ch;
             char actualChar = char.ToLower(ch);
             if (actualChar != expectedChar)
             {
@@ -114,7 +114,11 @@ public class CharToLower
         try
         {
             char ch = TestLibrary.Generator.GetCharNumber(-55);
-            char expectedChar = GlobLocHelper.OSToLower(ch); // ch;
+#if MONO
+            char expectedChar = '\u17e4';
+#else
+            char expectedChar = GlobLocHelper.OSToUpper(ch); // ch;
+#endif
             char actualChar = char.ToLower(ch);
             if (actualChar != expectedChar)
             {

@@ -108,7 +108,7 @@ public class Int32ToString4
         retVal &= VerifyToString("PostTest3", -0, "d", "0", new CultureInfo("pt-PT"));
         retVal &= VerifyToString("PostTest4", -1, "d", "@1", CustomCulture);
         retVal &= VerifyToString("PostTest5", -00000765, "f", "@765,000", CustomCulture);
-        retVal &= VerifyToString("PostTest6", 18650000, "e", TestLibrary.Utilities.IsWindows ? "1,865000e++007" : "1,865000e7", CustomCulture);
+        retVal &= VerifyToString("PostTest6", 18650000, "e", "1,865000e++007", CustomCulture);
         retVal &= VerifyToString("PostTest7", 18650000, "n", "18#65#00#00,000", CustomCulture);
         retVal &= VerifyToString("PostTest8", 56781100, "p", "5,678,110,000,0000~", CustomCulture);
         retVal &= VerifyToString("PostTest9", -76500, "c", "USD@7.65.00,000", CustomCulture);

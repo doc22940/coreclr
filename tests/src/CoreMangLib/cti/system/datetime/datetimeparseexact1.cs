@@ -255,7 +255,7 @@ public class DateTimeParseExact1
                              (String.Compare(TestLibrary.Utilities.CurrentCulture.DateTimeFormat.LongTimePattern, "hh:mm:ss tt", StringComparison.Ordinal) == 0 && 10 > hour ? "0" : "") + hour + ":" + 
                              (10 > minute ? "0" : "") + minute + ":" + 
                              (10 > second ? "0" : "") + second + " " + twelveHour[timeOfDay];
-
+#if !MONO
                 if (!TestLibrary.Utilities.IsWindows)
                 {
                     dateAfter = DateTime.Parse(dateBefore);
@@ -265,7 +265,7 @@ public class DateTimeParseExact1
                         ":" + (10 > span.Minutes ? "0" : "") + span.Minutes;
                     dateBefore += " " + strSpan;
                 }
-                
+#endif
                 dateAfter  = DateTime.ParseExact( dateBefore, "F", formater );
                 
                 //Dev10 Bug 686124: For mac, the ambiguous and invalid points in time on the Mac
@@ -342,7 +342,7 @@ public class DateTimeParseExact1
                 dateBefore =  month + "/" + + day + "/" + year + " " +
                               (String.Compare(TestLibrary.Utilities.CurrentCulture.DateTimeFormat.LongTimePattern, "hh:mm:ss tt", StringComparison.Ordinal) == 0 && 10 > hour ? "0" : "") + hour + ":" + 
                               (10 > minute ? "0" : "") + minute + ":" + (10 > second ? "0" : "") + second + " " + twelveHour[timeOfDay];
-
+#if !MONO
                 if (!TestLibrary.Utilities.IsWindows)
                 {
                     dateAfter = DateTime.Parse(dateBefore);
@@ -352,7 +352,7 @@ public class DateTimeParseExact1
                         ":" + (10 > span.Minutes ? "0" : "") + span.Minutes;
                     dateBefore += " " + strSpan;
                 }
-
+#endif
                 dateAfter = DateTime.ParseExact(dateBefore, "G", formater);
 
                 //Dev10 Bug 686124: For mac, the ambiguous and invalid points in time on the Mac
@@ -600,6 +600,7 @@ public class DateTimeParseExact1
                 int newHour = hour==0?12:hour;
                 dateBefore = (String.Compare(TestLibrary.Utilities.CurrentCulture.DateTimeFormat.LongTimePattern, "hh:mm:ss tt", StringComparison.Ordinal) == 0 && 10 > newHour ? "0" : "") + newHour + 
                              ":" + (10 > minute ? "0" : "") + minute + ":" + (10 > second ? "0" : "") + second + " " + twelveHour[timeOfDay];
+#if !MONO
                 if (!TestLibrary.Utilities.IsWindows)
                 {
                     dateAfter = DateTime.Parse(dateBefore);
@@ -609,7 +610,7 @@ public class DateTimeParseExact1
                         ":" + (10 > span.Minutes ? "0" : "") + span.Minutes;
                     dateBefore += " " + strSpan;
                 }
-
+#endif
                 dateAfter = DateTime.ParseExact(dateBefore, "T", formater);
 
                 if ((hour + timeOfDay*12) != dateAfter.Hour

@@ -7,10 +7,12 @@ public class Test570
     {
         int retVal = 100;
         int numDigits = 2;
+#if !MONO
         if (!TestLibrary.Utilities.IsWindows)
         {
             numDigits = 3;
         }
+#endif
 
 	    try
 	    {

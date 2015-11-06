@@ -1899,26 +1899,29 @@ Thanks for contributing to CLR Stress!
 
         if (test != null)
         {
-            try
+            if (File.Exists(Environment.ExpandEnvironmentVariables("%SCRIPTSDIR%\\record.js")))
             {
-                // Record the failure to the database
-                string arguments = String.Format("//b //nologo %SCRIPTSDIR%\\record.js -i %STRESSID% -a LOG_FAILED_TEST -k \"FAILED  {0}\"", test.RefOrID);
-                ProcessStartInfo psi = new ProcessStartInfo("cscript.exe", Environment.ExpandEnvironmentVariables(arguments));
-                psi.UseShellExecute = false;
-                psi.RedirectStandardOutput = true;
-
-                Process p = Process.Start(psi);
-                p.StandardOutput.ReadToEnd();
-                p.WaitForExit();
-                if (p.ExitCode != 0)
+                try
                 {
-                    Console.WriteLine("//b //nologo record.js -i %STRESSID% -a LOG_FAILED_TEST -k \"{0}\"", test.RefOrID);
+                    // Record the failure to the database
+                    string arguments = String.Format("//b //nologo %SCRIPTSDIR%\\record.js -i %STRESSID% -a LOG_FAILED_TEST -k \"FAILED  {0}\"", test.RefOrID);
+                    ProcessStartInfo psi = new ProcessStartInfo("cscript.exe", Environment.ExpandEnvironmentVariables(arguments));
+                    psi.UseShellExecute = false;
+                    psi.RedirectStandardOutput = true;
+
+                    Process p = Process.Start(psi);
+                    p.StandardOutput.ReadToEnd();
+                    p.WaitForExit();
+                    if (p.ExitCode != 0)
+                    {
+                        Console.WriteLine("//b //nologo record.js -i %STRESSID% -a LOG_FAILED_TEST -k \"{0}\"", test.RefOrID);
+                    }
+                    p.Dispose();
                 }
-                p.Dispose();
-            }
-            catch
-            {
-                Console.WriteLine("Exception while trying to log a test failure to the custom table.");
+                catch
+                {
+                    Console.WriteLine("Exception while trying to log a test failure to the custom table.");
+                }
             }
 
 #if !PROJECTK_BUILD

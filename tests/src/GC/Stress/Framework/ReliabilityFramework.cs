@@ -636,9 +636,9 @@ public class ReliabilityFramework
         if (myProcessName == null)
         {
             myProcessName = System.Windows.Forms.Application.ExecutablePath;
-            if (myProcessName.LastIndexOf(Path.SeparatorPath) != -1)
+            if (myProcessName.LastIndexOf(Path.PathSeparator) != -1)
             {
-                myProcessName = myProcessName.Substring(myProcessName.LastIndexOf(Path.SeparatorPath) + 1);
+                myProcessName = myProcessName.Substring(myProcessName.LastIndexOf(Path.PathSeparator) + 1);
                 if (myProcessName.LastIndexOf(".") != -1)
                 {
                     myProcessName = myProcessName.Substring(0, myProcessName.LastIndexOf("."));

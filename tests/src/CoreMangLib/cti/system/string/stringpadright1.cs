@@ -188,9 +188,17 @@ public class StringPadRight1
         TestLibrary.TestFramework.BeginScenario(c_TEST_DESC);
         try
         {
-            str.PadRight(totalWidth);
-            TestLibrary.TestFramework.LogError("007" + "TestId-" + c_TEST_ID, "OutOfMemoryException is not thrown as expected" + GetDataString(str, totalWidth));
-            retVal = false;
+          str = str.PadRight(totalWidth);
+
+          if (Environment.Is64BitProcess)
+          {
+              retVal = str[totalWidth - 1] == ' ';
+          }
+          else
+          {
+              TestLibrary.TestFramework.LogError("007" + "TestId-" + c_TEST_ID, "OutOfMemoryException is not thrown as expected" + GetDataString(str, totalWidth));
+              retVal = false;
+          }
         }
         catch (OutOfMemoryException)
         { }

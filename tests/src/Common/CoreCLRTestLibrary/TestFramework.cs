@@ -61,5 +61,18 @@ namespace TestLibrary
         {
             Logging.WriteLine("Beginning scenario: " + name);
         }
+
+#if MONO
+        public static bool IsLowMemoryTestEnvironment()
+        {
+            if (!Environment.Is64BitProcess)
+                return true;
+
+            // Require 6 GB physical RAM
+            var pc = new System.Diagnostics.PerformanceCounter("Mono Memory", "Total Physical Memory");
+
+            return pc.RawValue < 6L*1024L*1024L*1024L;
+        }
+#endif
     }
 }

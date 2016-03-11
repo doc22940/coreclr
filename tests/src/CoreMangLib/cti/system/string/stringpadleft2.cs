@@ -194,6 +194,12 @@ public class StringPadLeft2
         ch = TestLibrary.Generator.GetChar(-55);
 
         TestLibrary.TestFramework.BeginScenario(c_TEST_DESC);
+#if MONO
+        if (TestLibrary.TestFramework.IsLowMemoryTestEnvironment()) {
+            Console.WriteLine ("Not enough memory, skipping test.");
+            return true;
+        }
+#endif
         try
         {
           str = str.PadLeft(totalWidth,ch);

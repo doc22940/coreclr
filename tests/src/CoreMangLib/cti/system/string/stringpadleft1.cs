@@ -186,6 +186,12 @@ public class StringPadLeft1
         str = TestLibrary.Generator.GetString(-55, false, c_MIN_STRING_LEN, c_MAX_STRING_LEN);
 
         TestLibrary.TestFramework.BeginScenario(c_TEST_DESC);
+#if MONO
+        if (TestLibrary.TestFramework.IsLowMemoryTestEnvironment()) {
+            Console.WriteLine ("Not enough memory, skipping test.");
+            return true;
+        }
+#endif
         try
         {
           str = str.PadLeft(totalWidth);

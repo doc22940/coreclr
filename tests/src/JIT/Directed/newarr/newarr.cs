@@ -26,7 +26,11 @@ internal class AA
         }
         try
         {
+#if MONO
+            array = (int[]) Array.CreateInstance (typeof (int), SMALL2);
+#else
             array = new int[SMALL2];
+#endif
             Console.WriteLine("Test 2 failed");
             return 102;
         }
@@ -66,7 +70,11 @@ internal class AA
         }
         try
         {
+#if MONO
+            marray = (AA[,,]) Array.CreateInstance (typeof (AA), 2, SMALL2, SMALL2);
+#else
             marray = new AA[2, SMALL2, SMALL2];
+#endif
             Console.WriteLine("Test 6 failed");
             return 106;
         }

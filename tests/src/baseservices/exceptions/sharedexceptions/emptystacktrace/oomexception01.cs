@@ -34,7 +34,11 @@ public class SharedExceptions
 	
         try
         {            
+#if MONO
+            var g = Array.CreateInstance (typeof (Guid), Int32.MaxValue);
+#else
             Guid[] g = new Guid[Int32.MaxValue];
+#endif
         }
         catch(OutOfMemoryException e)
         {
@@ -42,6 +46,10 @@ public class SharedExceptions
 			
             Console.WriteLine("Caught OOM");     
 
+#if MONO
+            if (!e.StackTrace.ToString().Contains("SharedExceptions.CreateAndThrow ()"))
+                retVal = 50;
+#else
             if(e.StackTrace.ToString().Substring(0, e.StackTrace.Length - 8) != currStack.Substring(0, currStack.Length - 8))
             {	
             	Console.WriteLine("Actual Exception Stack Trace:");
@@ -51,6 +59,7 @@ public class SharedExceptions
 		        Console.WriteLine(currStack.ToString());
                 retVal = 50;
             }
+#endif
         }
             
     }

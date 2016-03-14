@@ -132,7 +132,11 @@ public class UIntPtrGetHashCode
         {
             UInt32 ui = (UInt32)Int32.MaxValue + (UInt32)TestLibrary.Generator.GetInt32(-55);
             uiPtr = new UIntPtr(ui);
+#if MONO
+            unsafe { expectedValue = unchecked((int)(void*)ui); }
+#else
             expectedValue = unchecked((Int32)((Int64)ui)) & 0x7fffffff;
+#endif
 
             actualValue = uiPtr.GetHashCode();
 

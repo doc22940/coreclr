@@ -53,7 +53,9 @@ public class BringUpTest
         Localloc(25);
 
         bool flag = false;
+#if !MONO  // wontfix, supporting this in Mono would mean overhead for little gain as per #33138
         try { Localloc(0); } catch (Exception) { flag = true; } finally { if(!flag) ret = Fail; }
+#endif
         return ret;        
     }
 }

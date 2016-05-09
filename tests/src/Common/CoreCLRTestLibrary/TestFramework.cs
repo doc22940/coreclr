@@ -68,8 +68,8 @@ namespace TestLibrary
             if (!Environment.Is64BitProcess)
                 return true;
 
-            // Require 6 GB physical RAM
-            var pc = new System.Diagnostics.PerformanceCounter("Mono Memory", "Total Physical Memory");
+            // Require 6 GB available RAM
+            var pc = new System.Diagnostics.PerformanceCounter("Mono Memory", "Available Physical Memory");
 
             return pc.RawValue < 6L*1024L*1024L*1024L;
         }

@@ -64,9 +64,6 @@
       // Code size       60 (0x3c)
       .maxstack  2
       .locals (class Test.AA V_0)
-      IL_0000:  ldstr      "finalizer called."
-      IL_0005:  call       void [System.Console]System.Console::WriteLine(class System.String)
-
       IL_0035:  ldc.i4.1
       IL_0036:  stsfld     bool Test.AA::finalizerCalled
       IL_003b:  ret

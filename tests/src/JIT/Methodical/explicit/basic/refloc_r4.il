@@ -34,8 +34,6 @@
     {
       // Code size       101 (0x65)
       .maxstack  2
-      IL_0000:  ldstr      "finalizer called."
-      IL_0005:  call       void [System.Console]System.Console::WriteLine(class System.String)
       IL_000a:  ldarg.0
       IL_0051:  ldfld      float32 Test.AA::mm
       			ldc.r4     45.119999

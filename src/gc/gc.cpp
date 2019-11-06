@@ -6422,8 +6422,10 @@ void gc_heap::fix_large_allocation_area (BOOL for_gc_p)
     alloc_context* acontext =
 #endif // _DEBUG
         generation_alloc_context (large_object_generation);
+#ifdef _DEBUG
     assert (acontext->alloc_ptr == 0);
     assert (acontext->alloc_limit == 0);
+#endif
 #if 0
     dprintf (3, ("Large object alloc context: ptr: %Ix, limit %Ix",
                  (size_t)acontext->alloc_ptr, (size_t)acontext->alloc_limit));

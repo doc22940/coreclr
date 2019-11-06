@@ -13,7 +13,8 @@
 #include <pthread.h>
 #include <signal.h>
 
-#include "config.gc.h"
+// #include "config.gc.h"
+#include "config.h"
 #include "common.h"
 
 #include "gcenv.structs.h"
@@ -435,7 +436,7 @@ uint32_t GCToOSInterface::GetCurrentProcessorNumber()
 // Check if the OS supports getting current processor number
 bool GCToOSInterface::CanGetCurrentProcessorNumber()
 {
-    return HAVE_SCHED_GETCPU;
+    return 1; // HAVE_SCHED_GETCPU;
 }
 
 // Flush write buffers of processors that are executing threads of the current process
@@ -943,7 +944,7 @@ uint64_t GCToOSInterface::GetPhysicalMemoryLimit(bool* is_restricted)
     }
 
     // Get the physical memory size
-#if HAVE_SYSCONF && HAVE__SC_PHYS_PAGES
+#if HAVE_SYSCONF // && HAVE__SC_PHYS_PAGES
     long pages = sysconf(_SC_PHYS_PAGES);
     if (pages == -1)
     {

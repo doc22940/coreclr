@@ -1306,8 +1306,10 @@ void xxxTableScanQueuedBlocksAsync(PTR_HandleTable pTable, PTR_TableSegment pSeg
     _ASSERTE(pCrstHolder->GetValue()==(&pTable->Lock));
     pCrstHolder->Release();
 
+#ifdef _DEBUG
     // sanity - this isn't a very asynchronous scan if we don't actually leave
     _ASSERTE(!pTable->Lock.OwnedByCurrentThread());
+#endif
 
     // perform the actual scanning of the specified blocks
     ProcessScanQueue(pAsyncInfo, ProcessScanQNode, (uintptr_t)pAsyncInfo->pfnBlockHandler, FALSE);

@@ -100,8 +100,10 @@ void CALLBACK PromoteRefCounted(_UNCHECKED_OBJECTREF *pObjRef, uintptr_t *pExtra
         }
     }
 
+#ifdef _DEBUG
     // Assert this object wasn't relocated since we are passing a temporary object's address.
     _ASSERTE(pOldObj == pObj);
+#endif
 }
 #endif // FEATURE_COMINTEROP || FEATURE_REDHAWK
 

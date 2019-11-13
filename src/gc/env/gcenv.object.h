@@ -43,41 +43,44 @@ static_assert(sizeof(ObjHeader) == sizeof(uintptr_t), "this assumption is made b
 #define MTFlag_Collectible          0x1000
 #define MTFlag_HasComponentSize     0x8000
 
-class MethodTable
-{
-public:
+typedef struct {
     uint16_t    m_componentSize;
     uint16_t    m_flags;
     uint32_t    m_baseSize;
+} mono_gc_descr;
 
-    MethodTable * m_pRelatedType;
+class MethodTable
+{
+public:
+    void *klass;
+    mono_gc_descr gc_descr;
 
 public:
     void InitializeFreeObject()
     {
-        m_baseSize = 3 * sizeof(void *);
-        m_componentSize = 1;
-        m_flags = MTFlag_HasComponentSize | MTFlag_IsArray;
+        gc_descr.m_baseSize = 4 * sizeof(void *);
+        gc_descr.m_componentSize = 1;
+        gc_descr.m_flags = MTFlag_HasComponentSize | MTFlag_IsArray;
     }
 
     uint32_t GetBaseSize()
     {
-        return m_baseSize;
+        return gc_descr.m_baseSize;
     }
 
     uint16_t RawGetComponentSize()
     {
-        return m_componentSize;
+        return gc_descr.m_componentSize;
     }
 
     bool Collectible()
     {
-        return (m_flags & MTFlag_Collectible) != 0;
+        return (gc_descr.m_flags & MTFlag_Collectible) != 0;
     }
 
     bool ContainsPointers()
     {
-        return (m_flags & MTFlag_ContainsPointers) != 0;
+        return (gc_descr.m_flags & MTFlag_ContainsPointers) != 0;
     }
 
     bool ContainsPointersOrCollectible()
@@ -94,28 +97,27 @@ public:
         //
         // The solution here is to do what the VM does and check the
         // HasComponentSize flag so that we're on the same page.
-        return (m_flags & MTFlag_HasComponentSize) != 0;
+        return (gc_descr.m_flags & MTFlag_HasComponentSize) != 0;
     }
 
     bool HasFinalizer()
     {
-        return (m_flags & MTFlag_HasFinalizer) != 0;
+        return (gc_descr.m_flags & MTFlag_HasFinalizer) != 0;
     }
 
     bool HasCriticalFinalizer()
     {
-        return (m_flags & MTFlag_HasCriticalFinalizer) != 0;
+        return (gc_descr.m_flags & MTFlag_HasCriticalFinalizer) != 0;
     }
 
     bool IsArray()
     {
-        return (m_flags & MTFlag_IsArray) != 0;
+        return (gc_descr.m_flags & MTFlag_IsArray) != 0;
     }
 
     MethodTable * GetParent()
     {
-        _ASSERTE(!IsArray());
-        return m_pRelatedType;
+	return NULL;
     }
 
     bool SanityCheck()
@@ -127,6 +129,7 @@ public:
 class Object
 {
     MethodTable * m_pMethTab;
+    void *sync_lock;
 
 public:
     ObjHeader * GetHeader()
@@ -149,7 +152,8 @@ public:
         m_pMethTab = pMT;
     }
 };
-#define MIN_OBJECT_SIZE     (2*sizeof(uint8_t*) + sizeof(ObjHeader))
+// This is the size of the empty array
+#define MIN_OBJECT_SIZE     (3*sizeof(uint8_t*) + sizeof(ObjHeader))
 
 class ArrayBase : public Object
 {

@@ -56,13 +56,6 @@ public:
     mono_gc_descr gc_descr;
 
 public:
-    void InitializeFreeObject()
-    {
-        gc_descr.m_baseSize = 4 * sizeof(void *);
-        gc_descr.m_componentSize = 1;
-        gc_descr.m_flags = MTFlag_HasComponentSize | MTFlag_IsArray;
-    }
-
     uint32_t GetBaseSize()
     {
         return gc_descr.m_baseSize;

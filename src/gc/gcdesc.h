@@ -152,18 +152,6 @@ public:
                (NumSeries-1)*sizeof(val_serie_item);
     }
 
-#ifndef DACCESS_COMPILE
-    static void Init (void* mem, size_t NumSeries)
-    {
-        *((size_t*)mem-1) = NumSeries;
-    }
-
-    static void InitValueClassSeries (void* mem, size_t NumSeries)
-    {
-        *((ptrdiff_t*)mem-1) = -((ptrdiff_t)NumSeries);
-    }
-#endif
-
     static PTR_CGCDesc GetCGCDescFromMT (MethodTable * pMT)
     {
         // If it doesn't contain pointers, there isn't a GCDesc

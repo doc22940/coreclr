@@ -19,6 +19,8 @@
 
 #include "gcpriv.h"
 
+#define FEATURE_CONSERVATIVE_GC 1
+
 #define USE_INTROSORT
 
 // We just needed a simple random number generator for testing.
@@ -4105,6 +4107,9 @@ public:
 
     void SetMarked()
     {
+	// Conservative GC marks object that points to free object method table. Why and what is going on ?
+	if (RawGetMethodTable () == g_gc_pFreeObjectMethodTable)
+            return;
         RawSetMethodTable((MethodTable *) (((size_t) RawGetMethodTable()) | GC_MARKED));
     }
 
@@ -4203,7 +4208,8 @@ public:
 
 #define header(i) ((CObjectHeader*)(i))
 
-#define free_list_slot(x) ((uint8_t**)(x))[2]
+// second word contains the free object length. Don't want to dirty that
+#define free_list_slot(x) ((uint8_t**)(x))[1]
 #define free_list_undo(x) ((uint8_t**)(x))[-1]
 #define UNDO_EMPTY ((uint8_t*)1)
 
@@ -18821,7 +18827,6 @@ uint8_t* gc_heap::next_end (heap_segment* seg, uint8_t* f)
     CGCDesc* map = CGCDesc::GetCGCDescFromMT((MethodTable*)(mt));           \
     CGCDescSeries* cur = map->GetHighestSeries();                           \
     ptrdiff_t cnt = (ptrdiff_t) map->GetNumSeries();                        \
-                                                                            \
     if (cnt >= 0)                                                           \
     {                                                                       \
         CGCDescSeries* last = map->GetLowestSeries();                       \

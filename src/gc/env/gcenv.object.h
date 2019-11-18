@@ -39,6 +39,7 @@ static_assert(sizeof(ObjHeader) == sizeof(uintptr_t), "this assumption is made b
 #define MTFlag_ContainsPointers     0x0100
 #define MTFlag_HasCriticalFinalizer 0x0800
 #define MTFlag_HasFinalizer         0x0010
+#define MTFlag_IsString             0x0004
 #define MTFlag_IsArray              0x0008
 #define MTFlag_Collectible          0x1000
 #define MTFlag_HasComponentSize     0x8000
@@ -155,6 +156,9 @@ class ArrayBase : public Object
 public:
     uint32_t GetNumComponents()
     {
+	// Null terminator is not included in the length
+	if (GetGCSafeMethodTable ()->gc_descr.m_flags & MTFlag_IsString)
+		return m_dwLength + 1;
         return m_dwLength;
     }
 

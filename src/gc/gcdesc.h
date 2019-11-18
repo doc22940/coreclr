@@ -122,7 +122,7 @@ public:
 };
 
 
-
+#define MONO_IMT_SIZE (19 * 2)
 
 
 typedef DPTR(class CGCDesc) PTR_CGCDesc;
@@ -164,7 +164,7 @@ public:
 
     size_t GetNumSeries ()
     {
-        return *(PTR_size_t(PTR_CGCDesc(this))-1);
+        return *(PTR_size_t(PTR_CGCDesc(this))- MONO_IMT_SIZE - 1);
     }
 
     // Returns lowest series in memory.
@@ -172,14 +172,14 @@ public:
     PTR_CGCDescSeries GetLowestSeries ()
     {
         _ASSERTE (ptrdiff_t(GetNumSeries()) > 0);
-        return PTR_CGCDescSeries(PTR_uint8_t(PTR_CGCDesc(this))
+        return PTR_CGCDescSeries(PTR_uint8_t(PTR_size_t(this) - MONO_IMT_SIZE)
                                  - ComputeSize(GetNumSeries()));
     }
 
     // Returns highest series in memory.
     PTR_CGCDescSeries GetHighestSeries ()
     {
-        return PTR_CGCDescSeries(PTR_size_t(PTR_CGCDesc(this))-1)-1;
+        return PTR_CGCDescSeries(PTR_size_t(PTR_CGCDesc(this))- MONO_IMT_SIZE - 1)-1;
     }
 
     // Returns number of immediate pointers this object has.
@@ -232,7 +232,7 @@ public:
 
     uint8_t *GetStartOfGCData()
     {
-        return ((uint8_t *)this) - GetSize();
+        return ((uint8_t *)this) - MONO_IMT_SIZE * sizeof (void*) - GetSize();
     }
 
 private:
